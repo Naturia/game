@@ -1,5 +1,7 @@
 ﻿var timerFunction;
 
+var prefix = "PuzzleGame/"
+
 var imagePuzzle = {
     stepCount: 0,
     startTime: new Date().getTime(),
@@ -53,13 +55,13 @@ var imagePuzzle = {
         var percentage = 100 / (gridSize - 1);
         var image = images[Math.floor(Math.random() * images.length)];
         $('#imgTitle').html(image.title);
-        $('#actualImage').attr('src', image.src);
+        $('#actualImage').attr('src', prefix + image.src);
         $('#sortable').empty();
         for (var i = 0; i < gridSize * gridSize; i++) {
             var xpos = (percentage * (i % gridSize)) + '%';
             var ypos = (percentage * Math.floor(i / gridSize)) + '%';
             var li = $('<li class="item" data-value="' + (i) + '"></li>').css({
-                'background-image': 'url(' + image.src + ')',
+                'background-image': 'url(' + prefix + image.src + ')',
                 'background-size': (gridSize * 100) + '%',
                 'background-position': xpos + ' ' + ypos,
                 'width': 400 / gridSize,
