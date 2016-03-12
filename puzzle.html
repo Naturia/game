@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Image Puzzle</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/image-puzzle.css" rel="stylesheet" />
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/image-puzzle.js"></script>
+</head>
+<body>
+
+
+    <div id="collage">
+
+        <h2>Image Puzzle</h2>
+        <hr />
+        <div id="playPanel" style="padding:5px;display:none;">
+            <h3 id="imgTitle"></h3> <hr />
+            <div style="display:inline-block; margin:auto; width:95%; vertical-align:top;">
+                <ul id="sortable" class="sortable"></ul>
+                <div id="actualImageBox">
+                    <div id="stepBox">
+                        <div>Steps:</div><div class="stepCount">0</div>
+                    </div>
+                    <div id="timeBox">
+                        Time Taken: <span id="timerPanel"></span> secs
+                    </div>
+                    <img id="actualImage" />
+                    <div>Re-arrange to create a picture like this.</div>
+                    <p id="levelPanel">
+                        <input type="radio" name="level" id="easy" checked="checked" value="3" /> <label for="easy">Easy</label>
+                        <input type="radio" name="level" id="medium" value="4" /> <label for="medium">Medium</label>
+                        <input type="radio" name="level" id="hard" value="5" /> <label for="hard">Hard</label>
+                    </p>
+                    <div>
+                        <button id="btnRule" type="button" class="btn" onclick="rules();">Rules</button>
+                        <button id="newPhoto" type="button" class="btn">Another Photo</button>
+                        <button id="btnReplay" type="button" class="btn" onclick="about();">About</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="gameOver" style="display:none;">
+            <div style="background-color: #fc9e9e; padding: 5px 10px 20px 10px; text-align: center; ">
+                <h2 style="text-align:center">Game Over!!</h2>
+                Congratulations!! <br /> You have completed <h3 id="name-success"> </h3>
+                <br />
+                Steps: <span class="stepCount">0</span> steps.
+                <br />
+                Time Taken: <span class="timeCount">0</span> seconds<br />
+                <br/>
+				
+				 <div>
+                    <button type="button" onclick="jumpWiki()" target="_blank">About</button>
+                </div>
+                <br/>
+               <div>
+                    <button type="button" onclick="jumpBaidu()" target="_blank">Search more</button>
+                </div>
+                <br/>
+
+                <div>
+                    <button type="button" onclick="window.location.reload(true);">Play Again</button>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            var images = [
+                { src: 'Big_ben.jpg', title: '1' },
+				{ src: 'Cat.jpg', title: '2' },
+                { src: 'Cherry_blossom.jpg', title: '3' },
+				{ src: 'Deer.jpg', title: '4' },
+				{ src: 'Dog.jpg', title: '5' },
+                { src: 'Helianthus.jpg', title: '6' },
+                { src: 'Lake.jpg', title: '7' },
+                { src: 'Lavandula.jpg', title: '8' },
+                { src: 'Lily_of_the_valley.jpg', title: '9' },
+                { src: 'Malus_spectabilis.jpg', title: '10' },
+                { src: 'Mushroom.jpg', title: '11' },
+                { src: 'Pear.jpg', title: '12' },
+                { src: 'Prague.jpg', title: '13' },
+                { src: 'Prairie.jpg', title: '14' },
+				{ src: 'Provence.jpg', title: '15' },
+				{ src: 'Rabbit.jpg', title: '16' },
+				{ src: 'Raccoon.jpg', title: '17' },
+				{ src: 'Sheep.jpg', title: '18' },
+                { src: 'Taj_Mahal.jpg', title: '19' },
+                { src: 'Venice.jpg', title: '20' },
+                { src: 'Wharf.jpg', title: '21' }
+
+            ];
+			
+
+            $(function () {
+                var gridSize = $('#levelPanel :radio:checked').val();
+                imagePuzzle.startGame(images, gridSize);
+                $('#newPhoto').click(function () {
+                    var gridSize = $('#levelPanel :radio:checked').val();  // Take the updated gridSize from UI.
+                    imagePuzzle.startGame(images, gridSize);
+                });
+
+                $('#levelPanel :radio').change(function (e) {
+                    var gridSize = $(this).val();
+                    imagePuzzle.startGame(images, gridSize);
+                });
+				
+            });
+			function jumpWiki() {
+				var path = images[$("#imgTitle").html() - 1].src
+				var name = path.substring(0, path.indexOf("."))
+				window.open("http://en.wikipedia.org/wiki/" + name)
+			}
+			function jumpBaidu() {
+				var path = images[$("#imgTitle").html() - 1].src
+				var name = path.substring(0, path.indexOf("."))
+				window.open("http://cn.bing.com/images/search?q=" + name)
+			}
+            function rules() {
+                alert('Re arrange the image parts in a way that it correctly forms the picture. \nThe no. of steps taken will be counted.');
+            }
+            function about() {
+                alert('Developed by Jesse Wang. \nShe can be contacted at: hellonaturia@gmail.com');
+            }
+        </script>
+    </div>
+</body>
+
+<body>
+<div style="text-align: center;">
+    <audio controls="controls">
+        <source src="sounds/1.mp3"  type="audio/ogg" loop="true">
+        <source src="sounds/1.mp3"  type="audio/mpeg" loop="true">
+        <embed height="100" width="100" src="sounds/1.mp3" />
+    </audio>
+</div>
+</body>
+
+</html>
